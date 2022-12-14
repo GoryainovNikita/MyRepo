@@ -1,24 +1,23 @@
+import java.util.Arrays;
+
 public class NewTest {
 
     public static void main(String[] args) {
-        char a = '\u044F';
-        char b = '\u0450';
+        String sentence = "Привет! меня зовут Павлик!";
 
-        System.out.println((char) (a + 1));
-        System.out.println(b);
 
-        char c = 'А';
-        int key = 100;
+        String[] rawWords = sentence.split("(?<=[\\s|(','&&'\\s')])");
 
-        while (key > 64) {
-            key = key - 64;
-        }
-        char result = (char) (c + key);
-        if (result > 'я') {
-            int tmp = key - ('я' - c);
-            result = (char) ('А' + tmp - 1);
+
+
+
+        for (int i = 0; i < rawWords.length; i++) {
+            System.out.println(rawWords[i].length());
         }
 
-        System.out.println(result);
+
+
+        System.out.println(Arrays.deepToString(rawWords));
     }
+
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 
 
         public LetterCount(String sentence) {
-            String[] rawWords = sentence.split(" ");
+            String[] rawWords = sentence.split("(?<=[\\s|(','&&'\\s')])");
             this.word = new Word[rawWords.length];
             for (int i = 0; i < rawWords.length; i++) {
                 LetterCount.Word tmp = new LetterCount.Word(rawWords[i]);
@@ -57,7 +57,7 @@ import java.util.Map;
                     hashMap.putIfAbsent(elem1, map.get(elem1));
                 }
             }
-
+/*
             System.out.print("Индивидуальные буквы: ");
             for (Map.Entry<Character, Integer> mapE : hashMap.entrySet()) {
                 System.out.print(mapE.getKey() + ", ");
@@ -66,6 +66,8 @@ import java.util.Map;
             for (Map.Entry<Character, Integer> mapE : hashMap.entrySet()) {
                 System.out.println("буква \"" + mapE.getKey() + "\" - " + mapE.getValue());
             }
+
+ */
             return hashMap;
         }
 

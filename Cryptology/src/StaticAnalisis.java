@@ -3,9 +3,8 @@ import org.w3c.dom.ls.LSOutput;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class StaticAnalisis {
     public static void greeting() throws IOException {
@@ -32,17 +31,19 @@ public class StaticAnalisis {
         letterCount.counterAllWords();
 
         HashMap<Character, Integer> hashMapCountryWords = letterCount.counterAllWords();
-        int sumOfAllCharacter = 0;
-        for (var elem : hashMapCountryWords.entrySet()) {
-            Integer integer = elem.getValue();
-            sumOfAllCharacter = sumOfAllCharacter + integer;
-        }
-        HashMap<Character, Integer> hashMapPercentChar = new HashMap<>();
-        for (var elem : hashMapCountryWords.entrySet()) {
-            Integer percent = elem.getValue() * 100 / sumOfAllCharacter;
-            hashMapPercentChar.put(elem.getKey(), percent);
-        }
-        return hashMapPercentChar;
+
+
+        int[] x = {1};
+
+        hashMapCountryWords.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .forEach(e -> hashMapCountryWords.put(e.getKey(), x[0]++));
+
+        System.out.println(hashMapCountryWords);
+
+
+
+        return hashMapCountryWords;
     }
 
     private static void statistic(String decrypt, String result, HashMap<Character, Integer> source) throws IOException {
@@ -57,10 +58,7 @@ public class StaticAnalisis {
                         for (var elem : hashMapDecrypted.entrySet()) {
                             if (elem.getKey() == chars[i]) {
                                 for (var elem1 : source.entrySet()) {
-                                    if(elem1.getValue() == 0){
-                                        continue;
-                                    }
-                                    else if(elem.getValue().equals(elem1.getValue())){
+                                    if(elem.getValue() == elem1.getValue()){
                                         chars[i] = elem1.getKey();
                                         break;
                                     }
