@@ -1,0 +1,6 @@
+*.txt
+/MyRepo
+.idea
+target/
+*.iml
+*.class
